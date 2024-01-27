@@ -21,6 +21,11 @@ export class ProductsService {
     if (product) {
       throw new ConflictException('Produto já existe');
     }
-    return await this.prisma.product.create({ data });
+    return await this.prisma.product.create({
+      data: {
+        ...data,
+        price: +data.price,
+      },
+    });
   }
 }
